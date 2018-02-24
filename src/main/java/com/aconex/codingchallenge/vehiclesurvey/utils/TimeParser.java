@@ -12,7 +12,6 @@ public class TimeParser {
      */
     public static int parseMilisecondsFrom(String inputLine) {
 
-
         try {
             // format valid input line: A[miliseconds] or B[miliseconds]
             int miliseconds = Integer.valueOf(inputLine.substring(1));
