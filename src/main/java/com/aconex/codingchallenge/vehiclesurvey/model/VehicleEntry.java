@@ -1,4 +1,4 @@
-package com.anonex.codingchallenge.vehiclesurvey.model;
+package com.aconex.codingchallenge.vehiclesurvey.model;
 
 /**
  * VehicleEntry class includes all information which can be retrieved from input data

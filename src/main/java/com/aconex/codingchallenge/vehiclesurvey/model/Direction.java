@@ -1,4 +1,4 @@
-package com.anonex.codingchallenge.vehiclesurvey.model;
+package com.aconex.codingchallenge.vehiclesurvey.model;
 
 /**
  * Define direction of vehicle in the survey
