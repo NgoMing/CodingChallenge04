@@ -15,8 +15,10 @@ public class TimeParser {
         try {
             // format valid input line: A[miliseconds] or B[miliseconds]
             int miliseconds = Integer.valueOf(inputLine.substring(1));
-            if (!isValid(miliseconds))
+            if (!isValid(miliseconds)) {
+                System.out.println("Out of miliseconds range from: " + inputLine);
                 return -1;
+            }
             return miliseconds;
         }
         catch (NumberFormatException nfe) {
@@ -27,11 +29,8 @@ public class TimeParser {
     }
 
     private static boolean isValid(int miliseconds) {
-        int milisecondsPerDay = Time.MILISECONDS_PER_SECOND *
-                                Time.SECONDS_PER_MINUTE *
-                                Time.MINUTES_PER_HOUR *
-                                Time.HOURS_PER_DAY;
+        int milisecondsPerDay = Time.MILISECONDS_PER_DAY;
 
-        return ((miliseconds >= 0) && miliseconds < milisecondsPerDay);
+        return ((miliseconds >= 0) && (miliseconds < milisecondsPerDay));
     }
 }

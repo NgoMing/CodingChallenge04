@@ -1,5 +1,7 @@
 package com.aconex.codingchallenge.vehiclesurvey.model;
 
+import com.aconex.codingchallenge.vehiclesurvey.constance.Time;
+
 /**
  * VehicleEntry class includes all information which can be retrieved from input data
  *      time when front axle is triggered
@@ -15,5 +17,13 @@ public class VehicleEntry {
         this.frontAxleTime = frontAxleTime;
         this.rearAxleTime = rearAxleTime;
         this.direction = direction;
+    }
+
+    public boolean isValid() {
+        return (frontAxleTime < rearAxleTime);
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }

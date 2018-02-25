@@ -1,0 +1,127 @@
+package com.aconex.codingchallenge.vehiclesurvey.parser;
+
+import com.aconex.codingchallenge.vehiclesurvey.constance.App;
+import com.aconex.codingchallenge.vehiclesurvey.model.Direction;
+import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntry;
+import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntryException;
+import com.aconex.codingchallenge.vehiclesurvey.utils.TimeParser;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class VehicleEntryParser {
+
+    public static final int NUMBER_OF_ENTRIES_FOR_NORTH_DIRECTION = 2;
+    public static final int NUMBER_OF_ENTRIES_FOR_SOUTH_DIRECTION = 4;
+    public static final int MINIMUM_NUMBER_OF_ENTRIES_NEEDED = 2;
+
+    /**
+     * parse all the input data lines
+     * @param inputLines
+     * @return list of VehicleEntry
+     */
+    public List<VehicleEntry> parse(List<String> inputLines) {
+        List<VehicleEntry> emptyList = new ArrayList<>();
+        List<VehicleEntry> vehicleEntries = new ArrayList<>();
+
+        while(!inputLines.isEmpty()) {
+            if (isInsufficientEntries(inputLines, MINIMUM_NUMBER_OF_ENTRIES_NEEDED)) {
+                return emptyList;
+            }
+
+            // check the second line to get direction
+            Direction direction = parseDirection(inputLines.get(1));
+
+            int numberOfEntriesNeeded = (direction == Direction.NORTH ?
+                                            NUMBER_OF_ENTRIES_FOR_NORTH_DIRECTION :
+                                            NUMBER_OF_ENTRIES_FOR_SOUTH_DIRECTION);
+
+            if (isInsufficientEntries(inputLines, numberOfEntriesNeeded)) {
+                return emptyList;
+            }
+
+            try {
+                if (direction == Direction.NORTH)
+                    inputLines = addNorthDirectionEntry(inputLines, vehicleEntries);
+                else
+                    inputLines = addSouthDirectionEntry(inputLines, vehicleEntries);
+            }
+            catch (VehicleEntryException vee) {
+                System.out.println("Error while creating entry");
+                return emptyList;
+            }
+        }
+
+        return vehicleEntries;
+    }
+
+    private List<String> addSouthDirectionEntry(List<String> inputLines, List<VehicleEntry> vehicleEntries) throws VehicleEntryException {
+        String frontAxleEntry1 = inputLines.get(0);
+        String rearAxleEntry1 = inputLines.get(1);
+        String frontAxleEntry2 = inputLines.get(2);
+        String rearAxleEntry2 = inputLines.get(3);
+
+        if (!isOrderOfEntriesValid(frontAxleEntry1, rearAxleEntry1,
+                                   frontAxleEntry2, rearAxleEntry2))
+            throw new VehicleEntryException("Invalid order of entries: " +
+                                    frontAxleEntry1 + ", " +
+                                    rearAxleEntry1 + ", " +
+                                    frontAxleEntry2 + ", " +
+                                    rearAxleEntry2);
+
+        int frontAxleTime1 = TimeParser.parseMilisecondsFrom(frontAxleEntry1);
+        int rearAxleTime1 = TimeParser.parseMilisecondsFrom(rearAxleEntry1);
+        int frontAxleTime2 = TimeParser.parseMilisecondsFrom(frontAxleEntry2);
+        int rearAxleTime2 = TimeParser.parseMilisecondsFrom(rearAxleEntry2);
+
+        int frontAxleTime = (frontAxleTime1 + frontAxleTime2) / 2;
+        int rearAxleTime = (rearAxleTime1 + rearAxleTime2) / 2;
+
+        VehicleEntry vehicleEntry = new VehicleEntry(frontAxleTime, rearAxleTime, Direction.SOUTH);
+
+        if (!vehicleEntry.isValid()) {
+            throw new VehicleEntryException("Invalid South direction entry");
+        }
+
+        vehicleEntries.add(vehicleEntry);
+        return inputLines.subList(4, inputLines.size());
+    }
+
+    private boolean isOrderOfEntriesValid(String frontAxleEntry1, String rearAxleEntry1, String frontAxleEntry2, String rearAxleEntry2) {
+
+        return frontAxleEntry1.startsWith(App.FIRST_SENSOR_PREFIX) &&
+               rearAxleEntry1.startsWith(App.SECOND_SENSOR_PREFIX) &&
+               frontAxleEntry2.startsWith(App.FIRST_SENSOR_PREFIX) &&
+               rearAxleEntry2.startsWith(App.SECOND_SENSOR_PREFIX);
+    }
+
+    private List<String> addNorthDirectionEntry(List<String> inputLines, List<VehicleEntry> vehicleEntries) throws VehicleEntryException {
+        String frontAxleEntry = inputLines.get(0);
+        String rearAxleEntry = inputLines.get(1);
+
+        int frontAxleTime = TimeParser.parseMilisecondsFrom(frontAxleEntry);
+        int rearAxleTime = TimeParser.parseMilisecondsFrom(rearAxleEntry);
+
+        VehicleEntry vehicleEntry = new VehicleEntry(frontAxleTime, rearAxleTime, Direction.NORTH);
+
+        if (!vehicleEntry.isValid()) {
+            throw new VehicleEntryException("Invalid North direction entry");
+        }
+
+        vehicleEntries.add(vehicleEntry);
+        return inputLines.subList(2, inputLines.size());
+    }
+
+    private Direction parseDirection(String secondLine) {
+        if (secondLine.startsWith(App.SECOND_SENSOR_PREFIX)) {
+            return Direction.SOUTH;
+        }
+        else {
+            return Direction.NORTH;
+        }
+    }
+
+    private boolean isInsufficientEntries(List<String> inputLines, int numberOfEntriesNeeded) {
+        return inputLines.size() < numberOfEntriesNeeded;
+    }
+}
