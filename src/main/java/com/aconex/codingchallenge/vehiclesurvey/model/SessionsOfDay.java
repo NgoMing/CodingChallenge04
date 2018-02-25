@@ -2,9 +2,8 @@ package com.aconex.codingchallenge.vehiclesurvey.model;
 
 import com.aconex.codingchallenge.vehiclesurvey.constance.Time;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * create session of a day with specific interval value
@@ -50,5 +49,13 @@ public class SessionsOfDay {
         }
 
         return sessions;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
+        sdf.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"));
+
+        return "Session " + sdf.format(startTime) + " to " + sdf.format(endTime);
     }
 }

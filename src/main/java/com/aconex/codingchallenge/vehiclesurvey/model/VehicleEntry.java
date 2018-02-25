@@ -1,7 +1,6 @@
 package com.aconex.codingchallenge.vehiclesurvey.model;
 
 import com.aconex.codingchallenge.vehiclesurvey.constance.App;
-import com.aconex.codingchallenge.vehiclesurvey.constance.Time;
 import com.aconex.codingchallenge.vehiclesurvey.utils.TimeParser;
 
 import java.util.Date;
