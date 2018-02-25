@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * parse vehicle entry to get features from raw data recorded
+ */
 public class VehicleEntryParser {
 
     public static final int NUMBER_OF_ENTRIES_FOR_NORTH_DIRECTION = 2;
@@ -62,6 +65,13 @@ public class VehicleEntryParser {
         return vehicleEntries;
     }
 
+    /**
+     * add Vehicle entry related to South direction
+     * @param inputLines
+     * @param vehicleEntries
+     * @return input lines remained after parsing
+     * @throws VehicleEntryException if invalid order of entries or invalid entries occurs
+     */
     private List<String> addSouthDirectionEntry(List<String> inputLines, List<VehicleEntry> vehicleEntries) throws VehicleEntryException {
         String frontAxleEntry1 = inputLines.get(0);
         String rearAxleEntry1 = inputLines.get(1);
@@ -95,6 +105,14 @@ public class VehicleEntryParser {
         return inputLines.subList(4, inputLines.size());
     }
 
+    /**
+     * check the validation of order of entries
+     * @param frontAxleEntry1
+     * @param rearAxleEntry1
+     * @param frontAxleEntry2
+     * @param rearAxleEntry2
+     * @return true if the order is correct
+     */
     private boolean isOrderOfEntriesValid(String frontAxleEntry1, String rearAxleEntry1, String frontAxleEntry2, String rearAxleEntry2) {
 
         return frontAxleEntry1.startsWith(App.FIRST_SENSOR_PREFIX) &&
@@ -103,6 +121,13 @@ public class VehicleEntryParser {
                rearAxleEntry2.startsWith(App.SECOND_SENSOR_PREFIX);
     }
 
+    /**
+     * add Vehicle entry related to North direction
+     * @param inputLines
+     * @param vehicleEntries
+     * @return input lines remained after parsing
+     * @throws VehicleEntryException if invalid entries occurs
+     */
     private List<String> addNorthDirectionEntry(List<String> inputLines, List<VehicleEntry> vehicleEntries) throws VehicleEntryException {
         String frontAxleEntry = inputLines.get(0);
         String rearAxleEntry = inputLines.get(1);
@@ -121,6 +146,10 @@ public class VehicleEntryParser {
         return inputLines.subList(2, inputLines.size());
     }
 
+    /**
+     * increase day if current day < previous day
+     * @param vehicleEntry
+     */
     private void updateDay(VehicleEntry vehicleEntry) {
         Date currentEntryTime = vehicleEntry.getTimeEntry();
         if (currentEntryTime.compareTo(lastEntryDay) < 0) {
@@ -131,6 +160,11 @@ public class VehicleEntryParser {
         lastEntryDay = currentEntryTime;
     }
 
+    /**
+     * define direction based on the second line
+     * @param secondLine
+     * @return direction of the vehicle entry
+     */
     private Direction parseDirection(String secondLine) {
         if (secondLine.startsWith(App.SECOND_SENSOR_PREFIX)) {
             return Direction.SOUTH;
@@ -140,6 +174,12 @@ public class VehicleEntryParser {
         }
     }
 
+    /**
+     * check the sufficient number of data lines for specific entry
+     * @param inputLines
+     * @param numberOfEntriesNeeded
+     * @return true if number of data lines are smaller than number of data lines needed
+     */
     private boolean isInsufficientEntries(List<String> inputLines, int numberOfEntriesNeeded) {
         return inputLines.size() < numberOfEntriesNeeded;
     }

@@ -1,5 +1,8 @@
 package com.aconex.codingchallenge.vehiclesurvey.constance;
 
+/**
+ * Define constance related to time
+ */
 public class Time {
 
     public static final int HOURS_PER_DAY = 24;

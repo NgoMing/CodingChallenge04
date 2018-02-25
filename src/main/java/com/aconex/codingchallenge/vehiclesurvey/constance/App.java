@@ -1,5 +1,8 @@
 package com.aconex.codingchallenge.vehiclesurvey.constance;
 
+/**
+ * Define the constance using in Application
+ */
 public class App {
 
     public static final String VALID_REGEX_INPUT = "^[AaBb][0-9]+$";

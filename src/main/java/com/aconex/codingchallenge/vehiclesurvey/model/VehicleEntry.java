@@ -25,10 +25,24 @@ public class VehicleEntry {
         this.day = day;
     }
 
+    // access method
+    public Direction getDirection() {
+        return direction;
+    }
+
     public int getDay() {
         return day;
     }
 
+    // update method
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    /**
+     * calculate speed in kilometer per hour
+     * @return speed of the vehicle
+     */
     public double getSpeedInKmPH() {
         if (!isValid())
             return 0;
@@ -37,19 +51,19 @@ public class VehicleEntry {
         return App.LENGTH_OF_VEHICLE / timeTaken;
     }
 
+    /**
+     * calculate Date when the vehicle went cross the counter
+     * @return
+     */
     public Date getTimeEntry() {
         return new Date((frontAxleTime + rearAxleTime) / 2);
     }
 
+    /**
+     * check the validation of entry
+     * @return true if recording time of front axle is smaller than one of rear axle
+     */
     public boolean isValid() {
         return (frontAxleTime < rearAxleTime);
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
     }
 }

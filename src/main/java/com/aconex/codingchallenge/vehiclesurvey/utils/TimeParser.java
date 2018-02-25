@@ -28,12 +28,22 @@ public class TimeParser {
         return -1;
     }
 
+    /**
+     * check the validation of miliseconds value
+     * @param miliseconds
+     * @return true if the value in range between 0 and miliseconds per day
+     */
     private static boolean isValid(int miliseconds) {
         int milisecondsPerDay = Time.MILISECONDS_PER_DAY;
 
         return ((miliseconds >= 0) && (miliseconds < milisecondsPerDay));
     }
 
+    /**
+     * convert miliseconds to hours
+     * @param miliseconds
+     * @return hours
+     */
     public static double convertToHours(int miliseconds) {
         return (double)miliseconds / (double)Time.MILISECONDS_PER_HOUR;
     }
