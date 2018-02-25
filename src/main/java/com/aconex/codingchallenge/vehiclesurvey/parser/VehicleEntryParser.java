@@ -7,6 +7,7 @@ import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntryException;
 import com.aconex.codingchallenge.vehiclesurvey.utils.TimeParser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class VehicleEntryParser {
@@ -14,6 +15,9 @@ public class VehicleEntryParser {
     public static final int NUMBER_OF_ENTRIES_FOR_NORTH_DIRECTION = 2;
     public static final int NUMBER_OF_ENTRIES_FOR_SOUTH_DIRECTION = 4;
     public static final int MINIMUM_NUMBER_OF_ENTRIES_NEEDED = 2;
+
+    private int currentDay;
+    private Date lastEntryDay;
 
     /**
      * parse all the input data lines
@@ -23,6 +27,9 @@ public class VehicleEntryParser {
     public List<VehicleEntry> parse(List<String> inputLines) {
         List<VehicleEntry> emptyList = new ArrayList<>();
         List<VehicleEntry> vehicleEntries = new ArrayList<>();
+
+        currentDay = 0;
+        lastEntryDay = new Date(0);
 
         while(!inputLines.isEmpty()) {
             if (isInsufficientEntries(inputLines, MINIMUM_NUMBER_OF_ENTRIES_NEEDED)) {
@@ -77,12 +84,13 @@ public class VehicleEntryParser {
         int frontAxleTime = (frontAxleTime1 + frontAxleTime2) / 2;
         int rearAxleTime = (rearAxleTime1 + rearAxleTime2) / 2;
 
-        VehicleEntry vehicleEntry = new VehicleEntry(frontAxleTime, rearAxleTime, Direction.SOUTH);
+        VehicleEntry vehicleEntry = new VehicleEntry(frontAxleTime, rearAxleTime, Direction.SOUTH, currentDay);
 
         if (!vehicleEntry.isValid()) {
             throw new VehicleEntryException("Invalid South direction entry");
         }
 
+        updateDay(vehicleEntry);
         vehicleEntries.add(vehicleEntry);
         return inputLines.subList(4, inputLines.size());
     }
@@ -102,14 +110,25 @@ public class VehicleEntryParser {
         int frontAxleTime = TimeParser.parseMilisecondsFrom(frontAxleEntry);
         int rearAxleTime = TimeParser.parseMilisecondsFrom(rearAxleEntry);
 
-        VehicleEntry vehicleEntry = new VehicleEntry(frontAxleTime, rearAxleTime, Direction.NORTH);
+        VehicleEntry vehicleEntry = new VehicleEntry(frontAxleTime, rearAxleTime, Direction.NORTH, currentDay);
 
         if (!vehicleEntry.isValid()) {
             throw new VehicleEntryException("Invalid North direction entry");
         }
 
+        updateDay(vehicleEntry);
         vehicleEntries.add(vehicleEntry);
         return inputLines.subList(2, inputLines.size());
+    }
+
+    private void updateDay(VehicleEntry vehicleEntry) {
+        Date currentEntryTime = vehicleEntry.getTimeEntry();
+        if (currentEntryTime.compareTo(lastEntryDay) < 0) {
+            currentDay ++;
+            vehicleEntry.setDay(currentDay);
+        }
+
+        lastEntryDay = currentEntryTime;
     }
 
     private Direction parseDirection(String secondLine) {

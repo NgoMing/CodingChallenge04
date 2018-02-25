@@ -86,4 +86,30 @@ public class VehicleEntryParserTest {
         assertTrue(output.isEmpty());
     }
 
+    private static final Object[] updateDayTest() {
+        return new Object[] {
+                // should increase day with North direction entry
+                new Object[] {new ArrayList<String>(Arrays.asList("A2000", "A2005", "A1000", "A1005")), 0, 1},
+                // should increase day with South direction entry
+                new Object[] {new ArrayList<String>(Arrays.asList("A2000", "B2005", "A2100", "B2105", "A1000", "B1005", "A1100", "B1105")), 0, 1},
+                // should increase day with both direction entry
+                new Object[] {new ArrayList<String>(Arrays.asList("A2000", "A2005", "A1000", "B1005", "A1100", "B1105")), 0, 1},
+                // should not increase day with North direction entry
+                new Object[] {new ArrayList<String>(Arrays.asList("A1000", "A1005", "A2000", "A2005")), 0, 0},
+                // should not increase day with South direction entry
+                new Object[] {new ArrayList<String>(Arrays.asList("A1000", "B1005", "A1100", "B1105", "A2000", "B2005", "A2100", "B2105")), 0, 0},
+                // should not increase day with both direction entry
+                new Object[] {new ArrayList<String>(Arrays.asList("A1000", "B1005", "A1100", "B1105", "A2000", "A2005")), 0, 0}
+        };
+    }
+
+    @Test
+    @Parameters(method = "updateDayTest")
+    public void shouldUpdateDayCorrectly(List<String> listOfInputs, int firstDay, int secondDay) throws Exception {
+        List<String> input = listOfInputs;
+        List<VehicleEntry> output = new VehicleEntryParser().parse(input);
+
+        assertEquals(firstDay, output.get(0).getDay());
+        assertEquals(secondDay, output.get(1).getDay());
+    }
 }
