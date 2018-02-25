@@ -1,6 +1,8 @@
 package com.aconex.codingchallenge.vehiclesurvey.model;
 
+import com.aconex.codingchallenge.vehiclesurvey.constance.App;
 import com.aconex.codingchallenge.vehiclesurvey.constance.Time;
+import com.aconex.codingchallenge.vehiclesurvey.utils.TimeParser;
 
 /**
  * VehicleEntry class includes all information which can be retrieved from input data
@@ -17,6 +19,14 @@ public class VehicleEntry {
         this.frontAxleTime = frontAxleTime;
         this.rearAxleTime = rearAxleTime;
         this.direction = direction;
+    }
+
+    public double getSpeedInKmPH() {
+        if (!isValid())
+            return 0;
+
+        double timeTaken = TimeParser.convertToHours(rearAxleTime - frontAxleTime);
+        return App.LENGTH_OF_VEHICLE / timeTaken;
     }
 
     public boolean isValid() {

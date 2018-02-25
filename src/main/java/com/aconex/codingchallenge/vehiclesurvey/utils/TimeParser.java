@@ -33,4 +33,8 @@ public class TimeParser {
 
         return ((miliseconds >= 0) && (miliseconds < milisecondsPerDay));
     }
+
+    public static double convertToHours(int miliseconds) {
+        return (double)miliseconds / (double)Time.MILISECONDS_PER_HOUR;
+    }
 }
