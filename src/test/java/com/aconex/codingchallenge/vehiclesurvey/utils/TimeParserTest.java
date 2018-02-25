@@ -15,7 +15,7 @@ public class TimeParserTest {
                 // negative value
                 new Object[] {"A-1234"},
                 // greater than the miliseconds in a day
-                new Object[] {"B86400000"},
+                new Object[] {"B86400001"},
                 // wrong type number
                 new Object[] {"A12ab45"},
                 // large input
