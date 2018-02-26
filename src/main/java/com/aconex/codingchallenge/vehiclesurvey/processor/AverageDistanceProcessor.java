@@ -17,6 +17,11 @@ public class AverageDistanceProcessor extends BaseProcessor {
     }
 
     @Override
+    public String description() {
+        return "Average distance in " + interval + " minute intervals";
+    }
+
+    @Override
     public String process(List<VehicleEntry> entries) {
         StringBuilder sb = new StringBuilder();
 

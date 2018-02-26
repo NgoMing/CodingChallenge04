@@ -8,29 +8,27 @@ import com.aconex.codingchallenge.vehiclesurvey.processor.IDataProcessor;
 import com.aconex.codingchallenge.vehiclesurvey.processor.VehicleCountProcessor;
 import com.aconex.codingchallenge.vehiclesurvey.utils.FileUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class VehicleCounterApplication {
 
-    private Map<String, IDataProcessor> processors;
+    private List<IDataProcessor> processors;
 
     // access method
-    public Map<String, IDataProcessor> getProcessors() {
+    public List<IDataProcessor> getProcessors() {
         return processors;
     }
 
     public void createProcessorsWithInterval(int[] intervals) {
-        processors = new HashMap<>();
+        processors = new ArrayList<>();
 
         for (int interval : intervals) {
-            String key = "Vehicle counts in " + interval + " minute intervals";
-            processors.put(key, new VehicleCountProcessor(interval));
-            key = "Average speed in " + interval + " minute intervals";
-            processors.put(key, new AverageSpeedProcessor(interval));
-            key = "Average distance in " + interval + " minute intervals";
-            processors.put(key, new AverageDistanceProcessor(interval));
+            processors.add(new VehicleCountProcessor(interval));
+            processors.add(new AverageSpeedProcessor(interval));
+            processors.add(new AverageDistanceProcessor(interval));
         }
     }
 
@@ -47,8 +45,8 @@ public class VehicleCounterApplication {
             return;
         }
 
-        processors.forEach( (key, processors) -> {
-            System.out.println(key);
+        processors.forEach( processors -> {
+            System.out.println(processors.description());
             System.out.println(processors.process(entries));
         });
     }

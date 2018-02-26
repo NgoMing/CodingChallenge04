@@ -14,6 +14,11 @@ public class AverageSpeedProcessor extends BaseProcessor{
     }
 
     @Override
+    public String description() {
+        return "Average speed in " + interval + " minute intervals";
+    }
+
+    @Override
     public String process(List<VehicleEntry> entries) {
         StringBuilder sb = new StringBuilder();
 

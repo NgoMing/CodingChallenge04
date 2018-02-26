@@ -22,6 +22,11 @@ public class VehicleCountProcessor extends BaseProcessor{
     }
 
     @Override
+    public String description() {
+        return "Vehicle counts in " + interval + " minute intervals";
+    }
+
+    @Override
     public String process(List<VehicleEntry> entries) {
         StringBuilder sb = new StringBuilder();
         SessionsOfDay peakSession = null;
