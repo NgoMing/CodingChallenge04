@@ -55,13 +55,6 @@ public class VehicleCountProcessorTest {
     }
 
     @Test
-    public void shouldGetCountCorrectly() throws Exception {
-        assertEquals(10, new VehicleCountProcessor(60).getCount(entries));
-        assertEquals(9, new VehicleCountProcessor(60).from(0).to(360).fromDay(0).toDay(3).getCount(entries));
-        assertEquals(1, new VehicleCountProcessor(60).from(50).to(100).fromDay(1).toDay(2).getCount(entries));
-    }
-
-    @Test
     public void shouldGiveSessionOutputForHourlyCount() throws Exception {
         VehicleCountProcessor processor = new VehicleCountProcessor(60);
         String output = processor.process(entries);
