@@ -4,7 +4,6 @@ import com.aconex.codingchallenge.vehiclesurvey.constance.App;
 import com.aconex.codingchallenge.vehiclesurvey.constance.Time;
 import com.aconex.codingchallenge.vehiclesurvey.model.SessionsOfDay;
 import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntry;
-import com.sun.deploy.security.SessionCertStore;
 
 import java.util.List;
 
