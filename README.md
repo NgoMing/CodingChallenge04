@@ -42,6 +42,12 @@ Luckily for you, you know that:
 This coding challenge should be accompanied with a data file containing the full vehicle survey data to be analysed by the program.
 
 ## Solution design
+* Using App and Time to store constant variable related to Application and Time correspondingly.
+* Using VehicleEntry to store all the information related to vehicle: frontAxleTime, rearAxleTime, direction and time
+* Using SessionOfDay to make a list of sessions in a day with a given interval
+* Using VehicleEntryParser to parse input lines to get information for VehicleEntry
+* Using IDataProcessor interface to abstract process method related to calculate number of vehicles, average speed and average distance
+* Using dataSample.txt data file to get the final log output.
 
 ## Install and usage
 
@@ -60,7 +66,6 @@ This coding challenge should be accompanied with a data file containing the full
 
 * Windows:
 ```
-java -jar build/libs/CodingChallenge04_VehicleSurvey-1.0-SNAPSHOT.jar
+java -jar build/libs/vehiclesurvey-1.0.jar [dataFileName.txt]
 ```
-
-## Test cases
+If dataFileName.txt does not exist, the project will read default data.
