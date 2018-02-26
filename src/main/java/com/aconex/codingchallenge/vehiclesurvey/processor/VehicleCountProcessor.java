@@ -21,6 +21,7 @@ public class VehicleCountProcessor extends BaseProcessor{
         this.interval = interval;
     }
 
+    @Override
     public String process(List<VehicleEntry> entries) {
         StringBuilder sb = new StringBuilder();
         SessionsOfDay peakSession = null;

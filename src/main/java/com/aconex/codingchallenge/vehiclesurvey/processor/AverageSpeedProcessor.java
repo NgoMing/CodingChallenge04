@@ -13,6 +13,7 @@ public class AverageSpeedProcessor extends BaseProcessor{
         this.interval = interval;
     }
 
+    @Override
     public String process(List<VehicleEntry> entries) {
         StringBuilder sb = new StringBuilder();
 

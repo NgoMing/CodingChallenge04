@@ -6,7 +6,7 @@ import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntry;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class BaseProcessor {
+public abstract class BaseProcessor implements IDataProcessor {
     public List<VehicleEntry> getEntriesInTheSession(List<VehicleEntry> entries, SessionsOfDay session) {
         return entries.stream().
                 filter(entry -> entry.getTimeEntry().compareTo(session.getStartTime()) >= 0
