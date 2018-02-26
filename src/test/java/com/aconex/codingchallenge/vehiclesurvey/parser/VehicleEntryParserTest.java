@@ -65,7 +65,7 @@ public class VehicleEntryParserTest {
                 // number of entries is smaller than minimum one needed
                 new Object[] {new ArrayList<String>(Arrays.asList("A1234", "A2345", "A4567"))},
                 // number of entries is smaller than one needed for South direction
-                new Object[] {new ArrayList<String>(Arrays.asList("A1234", "B1245", "A2345", "B7789", "A8851"))},
+                new Object[] {new ArrayList<String>(Arrays.asList("A1234", "B1245", "A2345", "B7789", "A8851", "B8900", "A9851"))},
                 // invalid order of South direction entry
                 new Object[] {new ArrayList<String>(Arrays.asList("A1234", "B1245", "A2345", "A2356"))},
                 new Object[] {new ArrayList<String>(Arrays.asList("A1234", "B1245", "B2345", "A2356"))},

@@ -38,4 +38,11 @@ public class AverageDistanceProcessorTest {
         assertEquals(expectedOutput, output);
     }
 
+    @Test
+    public void shouldReturnEmptyStringIfSessionIntervalIsNotEvenlyDistributed() throws Exception {
+        AverageDistanceProcessor processor = new AverageDistanceProcessor(25);
+        String output = processor.process(entries);
+
+        assertEquals("", output);
+    }
 }
