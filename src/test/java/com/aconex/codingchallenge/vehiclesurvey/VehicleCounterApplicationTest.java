@@ -37,7 +37,17 @@ public class VehicleCounterApplicationTest {
     public void run() throws Exception {
         app.createProcessorsWithInterval(intervals);
         app.run("dataSample.txt");
-        assertEquals("", outContent.toString());
+        assertTrue(outContent.toString().contains("Vehicle counts in 15 minute intervals"));
+        assertTrue(outContent.toString().contains("Average speed in 15 minute intervals"));
+        assertTrue(outContent.toString().contains("Average distance in 15 minute intervals"));
+
+        assertTrue(outContent.toString().contains("Vehicle counts in 30 minute intervals"));
+        assertTrue(outContent.toString().contains("Average speed in 30 minute intervals"));
+        assertTrue(outContent.toString().contains("Average distance in 30 minute intervals"));
+
+        assertTrue(outContent.toString().contains("Vehicle counts in 60 minute intervals"));
+        assertTrue(outContent.toString().contains("Average speed in 60 minute intervals"));
+        assertTrue(outContent.toString().contains("Average distance in 60 minute intervals"));
     }
 
 }
