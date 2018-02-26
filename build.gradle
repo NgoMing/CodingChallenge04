@@ -9,6 +9,17 @@ repositories {
     jcenter()
 }
 
+task publish(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': "Vehicle Survey coding challenge",
+                'Implementation-Version': version,
+                'Main-Class': 'com.aconex.codingchallenge.vehiclesurvey.VehicleCounterSimulator'
+    }
+    baseName = project.name
+    from { configuration.compile.collect { it.isDirectory() ? it : zipTree(it) }}
+    with jar
+}
+
 dependencies {
     testCompile (
         group: 'junit', name: 'junit', version: '4.12',
