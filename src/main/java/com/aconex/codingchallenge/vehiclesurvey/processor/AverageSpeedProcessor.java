@@ -5,11 +5,11 @@ import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntry;
 
 import java.util.List;
 
-public class SpeedProcessor extends BaseProcessor{
+public class AverageSpeedProcessor extends BaseProcessor{
 
     private int interval; // in minutes
 
-    public SpeedProcessor(int interval) {
+    public AverageSpeedProcessor(int interval) {
         this.interval = interval;
     }
 

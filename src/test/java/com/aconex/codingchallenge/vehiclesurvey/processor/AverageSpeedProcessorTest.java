@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class SpeedProcessorTest {
+public class AverageSpeedProcessorTest {
 
     private final List<VehicleEntry> entries = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class SpeedProcessorTest {
 
     @Test
     public void shouldGiveAverageSpeedForEachSession() throws Exception {
-        String output = new SpeedProcessor(360).process(entries);
+        String output = new AverageSpeedProcessor(360).process(entries);
 
         assertEquals(expectedOutput, output);
     }
