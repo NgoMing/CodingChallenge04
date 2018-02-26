@@ -1,4 +1,4 @@
-package com.aconex.codingchallenge.vehiclesurvey.constance;
+package com.aconex.codingchallenge.vehiclesurvey.constants;
 
 /**
  * Define the constance using in Application

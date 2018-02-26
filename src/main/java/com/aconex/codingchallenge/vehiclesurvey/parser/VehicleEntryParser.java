@@ -1,6 +1,6 @@
 package com.aconex.codingchallenge.vehiclesurvey.parser;
 
-import com.aconex.codingchallenge.vehiclesurvey.constance.App;
+import com.aconex.codingchallenge.vehiclesurvey.constants.App;
 import com.aconex.codingchallenge.vehiclesurvey.model.Direction;
 import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntry;
 import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntryException;

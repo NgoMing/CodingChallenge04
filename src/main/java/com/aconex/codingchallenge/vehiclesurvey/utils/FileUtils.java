@@ -1,6 +1,6 @@
 package com.aconex.codingchallenge.vehiclesurvey.utils;
 
-import com.aconex.codingchallenge.vehiclesurvey.constance.App;
+import com.aconex.codingchallenge.vehiclesurvey.constants.App;
 
 import java.io.BufferedReader;
 import java.io.IOException;

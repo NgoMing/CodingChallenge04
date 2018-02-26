@@ -1,6 +1,6 @@
 package com.aconex.codingchallenge.vehiclesurvey;
 
-import com.aconex.codingchallenge.vehiclesurvey.constance.App;
+import com.aconex.codingchallenge.vehiclesurvey.constants.App;
 
 public class VehicleCounterSimulator {
 

@@ -1,6 +1,6 @@
 package com.aconex.codingchallenge.vehiclesurvey.utils;
 
-import com.aconex.codingchallenge.vehiclesurvey.constance.Time;
+import com.aconex.codingchallenge.vehiclesurvey.constants.Time;
 
 public class TimeParser {
 

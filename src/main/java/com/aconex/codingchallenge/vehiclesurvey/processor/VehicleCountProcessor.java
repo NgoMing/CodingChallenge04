@@ -1,14 +1,11 @@
 package com.aconex.codingchallenge.vehiclesurvey.processor;
 
-import com.aconex.codingchallenge.vehiclesurvey.constance.App;
-import com.aconex.codingchallenge.vehiclesurvey.constance.Time;
+import com.aconex.codingchallenge.vehiclesurvey.constants.App;
 import com.aconex.codingchallenge.vehiclesurvey.model.Direction;
 import com.aconex.codingchallenge.vehiclesurvey.model.SessionsOfDay;
 import com.aconex.codingchallenge.vehiclesurvey.model.VehicleEntry;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
