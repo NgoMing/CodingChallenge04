@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Count the number of vehicle
  */
-public class VehicleCountProcessor {
+public class VehicleCountProcessor extends BaseProcessor{
     private int interval; // in minutes
 
     public VehicleCountProcessor(int interval) {
@@ -57,13 +57,4 @@ public class VehicleCountProcessor {
                 filter(entry -> entry.getDay() == day && entry.getDirection() == direction).
                 collect(Collectors.toList()).size();
     }
-
-    private List<VehicleEntry> getEntriesInTheSession(List<VehicleEntry> entries, SessionsOfDay session) {
-        return entries.stream().
-                filter(entry -> entry.getTimeEntry().compareTo(session.getStartTime()) >= 0
-                             && entry.getTimeEntry().compareTo(session.getEndTime()) <= 0).
-                collect(Collectors.toList());
-    }
-
-
 }
